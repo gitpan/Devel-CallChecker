@@ -8,7 +8,7 @@ use t::WriteHeader ();
 t::WriteHeader::write_header("callchecker0", "t");
 ok 1;
 require_ok "Devel::CallChecker";
-t::LoadXS::load_xs("callck", "t");
+t::LoadXS::load_xs("callck", "t", ["Devel::CallChecker"]);
 ok 1;
 
 t::callck::test_cv_getset_call_checker();

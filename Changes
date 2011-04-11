@@ -1,3 +1,12 @@
+version 0.001; 2011-04-11
+
+  * bugfix: use PERL_CALLCONV to achieve consistent ABI across compilers
+
+  * port to Windows (GCC toolchain) and Cygwin, where additional linker
+    magic is required to make importation from shared object work (MSVC
+    and BCC on Windows presumably still don't generate the linkable
+    version of the shared library)
+
 version 0.000; 2011-04-03
 
   * initial released version

@@ -8,7 +8,7 @@ use t::WriteHeader ();
 t::WriteHeader::write_header("callchecker0", "t");
 ok 1;
 require_ok "Devel::CallChecker";
-t::LoadXS::load_xs("rv2cvopcv", "t");
+t::LoadXS::load_xs("rv2cvopcv", "t", ["Devel::CallChecker"]);
 ok 1;
 
 t::rv2cvopcv::test_rv2cv_op_cv();

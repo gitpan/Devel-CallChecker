@@ -26,6 +26,22 @@
 #define QCONCAT1(a,b) QCONCAT0(a,b)
 #define QPFXD(name) QCONCAT1(QPFX, name)
 
+#if defined(WIN32) && PERL_VERSION_GE(5,13,6)
+# define MY_BASE_CALLCONV EXTERN_C
+# define MY_BASE_CALLCONV_S "EXTERN_C"
+#else /* !(WIN32 && >= 5.13.6) */
+# define MY_BASE_CALLCONV PERL_CALLCONV
+# define MY_BASE_CALLCONV_S "PERL_CALLCONV"
+#endif /* !(WIN32 && >= 5.13.6) */
+
+#define MY_EXPORT_CALLCONV MY_BASE_CALLCONV
+
+#if defined(WIN32) || defined(__CYGWIN__)
+# define MY_IMPORT_CALLCONV_S MY_BASE_CALLCONV_S" __declspec(dllimport)"
+#else
+# define MY_IMPORT_CALLCONV_S MY_BASE_CALLCONV_S
+#endif
+
 #ifndef rv2cv_op_cv
 
 # define RV2CVOPCV_MARK_EARLY     0x00000001
@@ -33,7 +49,7 @@
 
 # define Perl_rv2cv_op_cv QPFXD(roc0)
 # define rv2cv_op_cv(cvop, flags) Perl_rv2cv_op_cv(aTHX_ cvop, flags)
-CV *QPFXD(roc0)(pTHX_ OP *cvop, U32 flags)
+MY_EXPORT_CALLCONV CV *QPFXD(roc0)(pTHX_ OP *cvop, U32 flags)
 {
 	OP *rvop;
 	CV *cv;
@@ -151,7 +167,7 @@ static OP *THX_ck_entersub_args_stalk(pTHX_ OP *entersubop, OP *stalkcvop)
 
 # define Perl_ck_entersub_args_list QPFXD(eal0)
 # define ck_entersub_args_list(o) Perl_ck_entersub_args_list(aTHX_ o)
-OP *QPFXD(eal0)(pTHX_ OP *entersubop)
+MY_EXPORT_CALLCONV OP *QPFXD(eal0)(pTHX_ OP *entersubop)
 {
 	return ck_entersub_args_stalk(entersubop, newOP(OP_PADANY, 0));
 }
@@ -159,7 +175,8 @@ OP *QPFXD(eal0)(pTHX_ OP *entersubop)
 # define Perl_ck_entersub_args_proto QPFXD(eap0)
 # define ck_entersub_args_proto(o, gv, sv) \
 	Perl_ck_entersub_args_proto(aTHX_ o, gv, sv)
-OP *QPFXD(eap0)(pTHX_ OP *entersubop, GV *namegv, SV *protosv)
+MY_EXPORT_CALLCONV OP *QPFXD(eap0)(pTHX_ OP *entersubop, GV *namegv,
+	SV *protosv)
 {
 	const char *proto;
 	STRLEN proto_len;
@@ -179,7 +196,8 @@ OP *QPFXD(eap0)(pTHX_ OP *entersubop, GV *namegv, SV *protosv)
 # define Perl_ck_entersub_args_proto_or_list QPFXD(ean0)
 # define ck_entersub_args_proto_or_list(o, gv, sv) \
 	Perl_ck_entersub_args_proto_or_list(aTHX_ o, gv, sv)
-OP *QPFXD(ean0)(pTHX_ OP *entersubop, GV *namegv, SV *protosv)
+MY_EXPORT_CALLCONV OP *QPFXD(ean0)(pTHX_ OP *entersubop, GV *namegv,
+	SV *protosv)
 {
 	if(SvTYPE(protosv) == SVt_PVCV ? SvPOK(protosv) : SvOK(protosv))
 		return ck_entersub_args_proto(entersubop, namegv, protosv);
@@ -301,7 +319,8 @@ typedef OP *(*Perl_call_checker)(pTHX_ OP *, GV *, SV *);
 # define Perl_cv_get_call_checker QPFXD(gcc0)
 # define cv_get_call_checker(cv, ckfun_p, ckobj_p) \
 	Perl_cv_get_call_checker(aTHX_ cv, ckfun_p, ckobj_p)
-void QPFXD(gcc0)(pTHX_ CV *cv, Perl_call_checker *ckfun_p, SV **ckobj_p)
+MY_EXPORT_CALLCONV void QPFXD(gcc0)(pTHX_ CV *cv,
+	Perl_call_checker *ckfun_p, SV **ckobj_p)
 {
 	MAGIC *callmg = SvMAGICAL((SV*)cv) ?
 		mg_findext((SV*)cv, PERL_MAGIC_ext, &mgvtbl_checkcall) : NULL;
@@ -317,7 +336,8 @@ void QPFXD(gcc0)(pTHX_ CV *cv, Perl_call_checker *ckfun_p, SV **ckobj_p)
 # define Perl_cv_set_call_checker QPFXD(scc0)
 # define cv_set_call_checker(cv, ckfun, ckobj) \
 	Perl_cv_set_call_checker(aTHX_ cv, ckfun, ckobj)
-void QPFXD(scc0)(pTHX_ CV *cv, Perl_call_checker ckfun, SV *ckobj)
+MY_EXPORT_CALLCONV void QPFXD(scc0)(pTHX_ CV *cv,
+	Perl_call_checker ckfun, SV *ckobj)
 {
 	if(ckfun == Perl_ck_entersub_args_proto_or_list && ckobj == (SV*)cv) {
 		if(SvMAGICAL((SV*)cv))
@@ -400,7 +420,7 @@ CODE:
 			"Perl "PERL_VERSION_STRING" only\n"
 		"#endif /* Perl version mismatch */\n"
 #define DEFFN(RETTYPE, PUBNAME, PRIVNAME, ARGTYPES, ARGNAMES) \
-	RETTYPE" "QPFXS PRIVNAME"(pTHX_ "ARGTYPES");\n" \
+	MY_IMPORT_CALLCONV_S" "RETTYPE" "QPFXS PRIVNAME"(pTHX_ "ARGTYPES");\n" \
 	"#define Perl_"PUBNAME" "QPFXS PRIVNAME"\n" \
 	"#define "PUBNAME"("ARGNAMES") Perl_"PUBNAME"(aTHX_ "ARGNAMES")\n"
 #if Q_PROVIDE_RV2CV_OP_CV
