@@ -1,3 +1,15 @@
+version 0.002; 2011-05-19
+
+  * add callchecker_linkable constant to help users link with this module
+
+  * fully document the C functions
+
+  * avoid false test failures with parallel testing
+
+  * correct abstract line
+
+  * add Devel::CallParser to "see also" list
+
 version 0.001; 2011-04-11
 
   * bugfix: use PERL_CALLCONV to achieve consistent ABI across compilers

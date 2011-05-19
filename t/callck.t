@@ -5,10 +5,10 @@ use Test::More tests => 67;
 use t::LoadXS ();
 use t::WriteHeader ();
 
-t::WriteHeader::write_header("callchecker0", "t");
+t::WriteHeader::write_header("callchecker0", "t", "callck");
 ok 1;
 require_ok "Devel::CallChecker";
-t::LoadXS::load_xs("callck", "t", ["Devel::CallChecker"]);
+t::LoadXS::load_xs("callck", "t", [Devel::CallChecker::callchecker_linkable()]);
 ok 1;
 
 t::callck::test_cv_getset_call_checker();

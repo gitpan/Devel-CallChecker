@@ -1,6 +1,6 @@
 NAME
 
-Devel::CallChecker - custom parsing attached to subroutines
+Devel::CallChecker - custom op checking attached to subroutines
 
 DESCRIPTION
 

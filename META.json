@@ -1,5 +1,5 @@
 {
-   "abstract" : "custom parsing attached to subroutines",
+   "abstract" : "custom op checking attached to subroutines",
    "author" : [
       "Andrew Main (Zefram) <zefram@fysh.org>"
    ],
@@ -39,6 +39,7 @@
       "runtime" : {
          "requires" : {
             "DynaLoader" : 0,
+            "DynaLoader::Functions" : 0,
             "Exporter" : 0,
             "parent" : 0,
             "perl" : "5.006",
@@ -50,7 +51,7 @@
    "provides" : {
       "Devel::CallChecker" : {
          "file" : "lib/Devel/CallChecker.pm",
-         "version" : "0.001"
+         "version" : "0.002"
       }
    },
    "release_status" : "stable",
@@ -59,5 +60,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.001"
+   "version" : "0.002"
 }
