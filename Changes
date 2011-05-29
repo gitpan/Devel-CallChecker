@@ -1,3 +1,10 @@
+version 0.003; 2011-05-29
+
+  * bugfix: set up CV name links correctly for error messages from
+    prototype checkers
+
+  * bugfix: don't leak temporary GVs and CVs in prototype checkers
+
 version 0.002; 2011-05-19
 
   * add callchecker_linkable constant to help users link with this module

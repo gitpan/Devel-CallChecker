@@ -110,6 +110,10 @@ static SV *THX_newSV_type(pTHX_ svtype type)
 #  define GvCV_set(gv, cv) (GvCV(gv) = (cv))
 # endif /* !GvCV_set */
 
+# ifndef CvGV_set
+#  define CvGV_set(cv, gv) (CvGV(cv) = (gv))
+# endif /* !CvGV_set */
+
 # define entersub_extract_args(eo) THX_entersub_extract_args(aTHX_ eo)
 static OP *THX_entersub_extract_args(pTHX_ OP *entersubop)
 {
@@ -187,9 +191,10 @@ MY_EXPORT_CALLCONV OP *QPFXD(eap0)(pTHX_ OP *entersubop, GV *namegv,
 	proto = SvPV(protosv, proto_len);
 	stalkcv = (CV*)newSV_type(SVt_PVCV);
 	sv_setpvn((SV*)stalkcv, proto, proto_len);
-	stalkgv = (GV*)newSV(0);
+	stalkgv = (GV*)sv_2mortal(newSV(0));
 	gv_init(stalkgv, GvSTASH(namegv), GvNAME(namegv), GvNAMELEN(namegv), 0);
 	GvCV_set(stalkgv, stalkcv);
+	CvGV_set(stalkcv, stalkgv);
 	return ck_entersub_args_stalk(entersubop, newGVOP(OP_GV, 0, stalkgv));
 }
 

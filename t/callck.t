@@ -1,7 +1,7 @@
 use warnings;
 use strict;
 
-use Test::More tests => 67;
+use Test::More tests => 79;
 use t::LoadXS ();
 use t::WriteHeader ();
 
@@ -93,7 +93,7 @@ is $foo_ret, "z";
 t::callck::cv_set_call_checker_proto(\&foo, undef);
 $foo_got = undef;
 eval q{$foo_ret = foo(@b, @c);};
-isnt $@, "";
+like $@, qr/ with no proto /;
 is_deeply $foo_got, undef;
 is $foo_ret, "z";
 
@@ -107,7 +107,21 @@ is $foo_ret, "z";
 t::callck::cv_set_call_checker_proto(\&foo, \&baz);
 $foo_got = undef;
 eval q{$foo_ret = foo(@b, @c);};
-isnt $@, "";
+like $@, qr/ with no proto /;
+is_deeply $foo_got, undef;
+is $foo_ret, "z";
+
+t::callck::cv_set_call_checker_proto(\&foo, "\$");
+$foo_got = undef;
+eval q{$foo_ret = foo();};
+like $@, qr/\ANot enough arguments for main::foo /;
+is_deeply $foo_got, undef;
+is $foo_ret, "z";
+
+t::callck::cv_set_call_checker_proto(\&foo, "\$");
+$foo_got = undef;
+eval q{$foo_ret = foo(1,2);};
+like $@, qr/\AToo many arguments for main::foo /;
 is_deeply $foo_got, undef;
 is $foo_ret, "z";
 
@@ -137,6 +151,20 @@ $foo_got = undef;
 eval q{$foo_ret = foo(@b, @c);};
 is $@, "";
 is_deeply $foo_got, [ qw(a b), qw(a b c) ];
+is $foo_ret, "z";
+
+t::callck::cv_set_call_checker_proto_or_list(\&foo, "\$");
+$foo_got = undef;
+eval q{$foo_ret = foo();};
+like $@, qr/\ANot enough arguments for main::foo /;
+is_deeply $foo_got, undef;
+is $foo_ret, "z";
+
+t::callck::cv_set_call_checker_proto_or_list(\&foo, "\$");
+$foo_got = undef;
+eval q{$foo_ret = foo(1,2);};
+like $@, qr/\AToo many arguments for main::foo /;
+is_deeply $foo_got, undef;
 is $foo_ret, "z";
 
 t::callck::cv_set_call_checker_multi_sum(\&foo);

@@ -47,7 +47,7 @@ use strict;
 
 use DynaLoader::Functions 0.000 qw(linkable_for_module);
 
-our $VERSION = "0.002";
+our $VERSION = "0.003";
 
 use parent "Exporter";
 our @EXPORT_OK = qw(callchecker0_h callchecker_linkable);
