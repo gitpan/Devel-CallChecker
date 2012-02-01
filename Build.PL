@@ -107,6 +107,9 @@ Module::Build->subclass(code => q{
 		"strict" => 0,
 		"warnings" => 0,
 	},
+	conflicts => {
+		"B::Hooks::OP::Check" => "< 0.19",
+	},
 	dynamic_config => 0,
 	meta_add => { distribution_type => "module" },
 	create_makefile_pl => "passthrough",

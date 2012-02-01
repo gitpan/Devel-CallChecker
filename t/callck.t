@@ -93,7 +93,7 @@ is $foo_ret, "z";
 t::callck::cv_set_call_checker_proto(\&foo, undef);
 $foo_got = undef;
 eval q{$foo_ret = foo(@b, @c);};
-like $@, qr/ with no proto /;
+like $@, qr/ with no proto[ ,]/;
 is_deeply $foo_got, undef;
 is $foo_ret, "z";
 
@@ -107,7 +107,7 @@ is $foo_ret, "z";
 t::callck::cv_set_call_checker_proto(\&foo, \&baz);
 $foo_got = undef;
 eval q{$foo_ret = foo(@b, @c);};
-like $@, qr/ with no proto /;
+like $@, qr/ with no proto[ ,]/;
 is_deeply $foo_got, undef;
 is $foo_ret, "z";
 

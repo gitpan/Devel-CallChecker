@@ -1,3 +1,17 @@
+version 0.004; 2012-02-01
+
+  * in documentation, clarify that the header and linkable functions
+    should be called at build time
+
+  * add B::CallChecker to "see also" list
+
+  * update tests to accept Perl 5.15.7's modified panic error messages
+
+  * in Build.PL, declare incompatibility with pre-0.19
+    B::Hooks::OP::Check, which doesn't play nicely around op check hooking
+
+  * convert .cvsignore to .gitignore
+
 version 0.003; 2011-05-29
 
   * bugfix: set up CV name links correctly for error messages from

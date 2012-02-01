@@ -33,9 +33,13 @@ supporting functions available.  (It is possible to achieve the effect
 of C<cv_set_call_checker> from XS code on much earlier Perl versions,
 but it is painful to achieve without the centralised facility.)
 
-This module provides the implementation of the functions at runtime
-(on Perls where they are not provided by the core), and also at compile
-time supplies the C header file which provides access to the functions.
+This module provides the implementation of the functions at runtime (on
+Perls where they are not provided by the core).  It also, at compile time,
+supplies the C header file and link library which provide access to the
+functions.  In normal use, L</callchecker0_h> and L</callchecker_linkable>
+should be called at build time (not authoring time) for the module that
+wishes to use the C functions.
+
 
 =cut
 
@@ -47,7 +51,7 @@ use strict;
 
 use DynaLoader::Functions 0.000 qw(linkable_for_module);
 
-our $VERSION = "0.003";
+our $VERSION = "0.004";
 
 use parent "Exporter";
 our @EXPORT_OK = qw(callchecker0_h callchecker_linkable);
@@ -257,6 +261,7 @@ by the name defined by the I<namegv> parameter.
 
 =head1 SEE ALSO
 
+L<B::CallChecker>,
 L<Devel::CallParser>,
 L<perlapi/cv_set_call_checker>
 
@@ -266,7 +271,7 @@ Andrew Main (Zefram) <zefram@fysh.org>
 
 =head1 COPYRIGHT
 
-Copyright (C) 2011 Andrew Main (Zefram) <zefram@fysh.org>
+Copyright (C) 2011, 2012 Andrew Main (Zefram) <zefram@fysh.org>
 
 =head1 LICENSE
 
