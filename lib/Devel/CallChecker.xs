@@ -317,6 +317,29 @@ static MAGIC *THX_sv_magicext(pTHX_ SV *sv, SV *obj, int type,
 #  define PERL_MAGIC_ext '~'
 # endif /* !PERL_MAGIC_ext */
 
+# if !PERL_VERSION_GE(5,9,3)
+typedef OP *(*Perl_check_t)(pTHX_ OP *);
+# endif /* <5.9.3 */
+
+# if !PERL_VERSION_GE(5,10,1)
+typedef unsigned Optype;
+# endif /* <5.10.1 */
+
+# ifndef wrap_op_checker
+#  define wrap_op_checker(c,n,o) THX_wrap_op_checker(aTHX_ c,n,o)
+static void THX_wrap_op_checker(pTHX_ Optype opcode,
+	Perl_check_t new_checker, Perl_check_t *old_checker_p)
+{
+	if(*old_checker_p) return;
+	OP_REFCNT_LOCK;
+	if(!*old_checker_p) {
+		*old_checker_p = PL_check[opcode];
+		PL_check[opcode] = new_checker;
+	}
+	OP_REFCNT_UNLOCK;
+}
+# endif /* !wrap_op_checker */
+
 static MGVTBL mgvtbl_checkcall;
 
 typedef OP *(*Perl_call_checker)(pTHX_ OP *, GV *, SV *);
@@ -394,7 +417,7 @@ static OP *myck_entersub(pTHX_ OP *entersubop)
 	return ckfun(aTHX_ entersubop, namegv, ckobj);
 }
 
-#define Q_PROVIDE_CV_SET_CALL_CHECKER 1
+# define Q_PROVIDE_CV_SET_CALL_CHECKER 1
 
 #endif /* !cv_set_call_checker */
 
@@ -404,8 +427,7 @@ PROTOTYPES: DISABLE
 
 BOOT:
 #if Q_PROVIDE_CV_SET_CALL_CHECKER
-	nxck_entersub = PL_check[OP_ENTERSUB];
-	PL_check[OP_ENTERSUB] = myck_entersub;
+	wrap_op_checker(OP_ENTERSUB, myck_entersub, &nxck_entersub);
 #endif /* Q_PROVIDE_CV_SET_CALL_CHECKER */
 
 SV *

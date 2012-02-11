@@ -49,9 +49,7 @@ package Devel::CallChecker;
 use warnings;
 use strict;
 
-use DynaLoader::Functions 0.000 qw(linkable_for_module);
-
-our $VERSION = "0.004";
+our $VERSION = "0.005";
 
 use parent "Exporter";
 our @EXPORT_OK = qw(callchecker0_h callchecker_linkable);
@@ -86,7 +84,11 @@ This list will be empty on many platforms.
 
 =cut
 
-sub callchecker_linkable() { linkable_for_module(__PACKAGE__) }
+sub callchecker_linkable() {
+	require DynaLoader::Functions;
+	DynaLoader::Functions->VERSION(0.001);
+	return DynaLoader::Functions::linkable_for_module(__PACKAGE__);
+}
 
 =back
 

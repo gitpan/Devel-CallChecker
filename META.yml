@@ -30,10 +30,10 @@ name: Devel-CallChecker
 provides:
   Devel::CallChecker:
     file: lib/Devel/CallChecker.pm
-    version: 0.004
+    version: 0.005
 requires:
   DynaLoader: 0
-  DynaLoader::Functions: 0
+  DynaLoader::Functions: 0.001
   Exporter: 0
   parent: 0
   perl: 5.006
@@ -41,4 +41,4 @@ requires:
   warnings: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.004
+version: 0.005

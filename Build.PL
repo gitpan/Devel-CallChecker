@@ -100,7 +100,7 @@ Module::Build->subclass(code => q{
 	},
 	requires => {
 		"DynaLoader" => 0,
-		"DynaLoader::Functions" => 0,
+		"DynaLoader::Functions" => "0.001",
 		"Exporter" => 0,
 		"parent" => 0,
 		"perl" => "5.006",

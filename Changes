@@ -1,3 +1,16 @@
+version 0.005; 2012-02-11
+
+  * be thread-safe, by idempotence and mutex control on op check hooking
+
+  * load DynaLoader::Functions lazily, because it is only required at
+    build time of users of this module, not required at all in normal
+    runtime
+
+  * avoid potential circular dependency chain, by requiring a version
+    of DynaLoader::Functions that has reduced its dependencies
+
+  * fix some C preprocessor directive indentation
+
 version 0.004; 2012-02-01
 
   * in documentation, clarify that the header and linkable functions

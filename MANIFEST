@@ -16,5 +16,8 @@ t/pod_cvg.t
 t/pod_syn.t
 t/rv2cvopcv.t
 t/rv2cvopcv.xs
+t/threads.t
+t/threads1.xs
+t/threads2.xs
 typemap
 SIGNATURE    Added here by Module::Build
