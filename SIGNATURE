@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.68.
+signed via the Module::Signature module, version 0.73.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -16,14 +16,14 @@ Hash: SHA1
 
 SHA1 28471ed9c62bbfb12a2afac9911c6dd919b7f9f5 .gitignore
 SHA1 b858dab2430fd53a60a5895b4374c673f1dcb095 Build.PL
-SHA1 c171e684fa18f639ee02c735a40a584a363f9113 Changes
+SHA1 626aea16910824d9429c99ab89554fdad17f5e3a Changes
 SHA1 74e8d30b29251efd2bf67be0d974b42a98d0f7bc MANIFEST
-SHA1 e45763215bbf212319c2f7b40fd97334292ed8dc META.json
-SHA1 d35b1fdd5d7fd3e1036b7f25acb785681088631f META.yml
-SHA1 2157ae40589595d6cc1585fd7279b25bcf8f5852 Makefile.PL
-SHA1 4dd9e72727986afc39335b88a01ec9b5b5fa3d9b README
-SHA1 192ebac6a929c801ee0b7ede40d5c45932421c7d lib/Devel/CallChecker.pm
-SHA1 db905de714ab4ef0838db39444f69c819ded6da2 lib/Devel/CallChecker.xs
+SHA1 34502e73f376e4e2fedf5659233fbca40609bf32 META.json
+SHA1 6df3e45b4a925af2f65e7dc4074270bbba4a2453 META.yml
+SHA1 6f174e79260c6dd208606b5570af15c175776ac1 Makefile.PL
+SHA1 168b49b084d78880a64d35e523516ff86abaeb4d README
+SHA1 a7e2186b99140183ea46df86ca5228215ee18ed4 lib/Devel/CallChecker.pm
+SHA1 5f4d18b80839f76105e70d2c6028e8a439835e7c lib/Devel/CallChecker.xs
 SHA1 f02cae7124e7060dbd03f4b62113532e08b289d9 t/LoadXS.pm
 SHA1 3652419516be8528af3d5e7cb45d06f7ccbb7237 t/WriteHeader.pm
 SHA1 100b0d3535a699b416b323ed33ced33153d031a9 t/callck.t
@@ -31,15 +31,15 @@ SHA1 11aa3c4bcd7a1d2b5211bb8310899bc61dff20f3 t/callck.xs
 SHA1 904d9a4f76525e2303e4b0c168c68230f223c8de t/pod_cvg.t
 SHA1 65c75abdef6f01a5d1588a307f2ddfe2333dc961 t/pod_syn.t
 SHA1 fe2dc3514b3f7c123f075779da779e7e869fb00c t/rv2cvopcv.t
-SHA1 1a53fa8d6cc1d996e48b9279045fc67d3a6e8066 t/rv2cvopcv.xs
-SHA1 f6cfb76014dd6e7991b2512baa1162658433f5d3 t/threads.t
+SHA1 c8ddecbc62112ef846d14ebdaf91b50156d80ed5 t/rv2cvopcv.xs
+SHA1 3bab8adfd90d8e7629ec9e86d3a53dd0b5fad227 t/threads.t
 SHA1 1ad7681a845fdecc219ce5b0ced752ec084beb1d t/threads1.xs
 SHA1 30e0563165e2583c63ec573887503a8ce8e5a643 t/threads2.xs
 SHA1 80af1f40b1054da5c48fe7b3d22f1796cd24d3d8 typemap
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAk82pRMACgkQOV9mt2VyAVE0PACdE85q7obR84nvZtBeCUVCqlOl
-dM0AnjTpJyzAAjHY4vo23Xfa+o4CLlo0
-=Su+T
+iEYEARECAAYFAlI99PQACgkQOV9mt2VyAVGPlACdHFbqKbIbNMvaZDVfslGyBGWk
+fywAnRZeiu6zMeQ7YR7UxkF/8OSafips
+=2DJO
 -----END PGP SIGNATURE-----

@@ -49,7 +49,7 @@ package Devel::CallChecker;
 use warnings;
 use strict;
 
-our $VERSION = "0.005";
+our $VERSION = "0.006";
 
 use parent "Exporter";
 our @EXPORT_OK = qw(callchecker0_h callchecker_linkable);
@@ -273,7 +273,7 @@ Andrew Main (Zefram) <zefram@fysh.org>
 
 =head1 COPYRIGHT
 
-Copyright (C) 2011, 2012 Andrew Main (Zefram) <zefram@fysh.org>
+Copyright (C) 2011, 2012, 2013 Andrew Main (Zefram) <zefram@fysh.org>
 
 =head1 LICENSE
 

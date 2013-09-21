@@ -19,9 +19,9 @@ configure_requires:
   strict: 0
   warnings: 0
 conflicts:
-  B::Hooks::OP::Check: 0
+  B::Hooks::OP::Check: '< 0.19'
 dynamic_config: 0
-generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.112621'
+generated_by: 'Module::Build version 0.4007, CPAN::Meta::Converter version 2.131560'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -30,7 +30,7 @@ name: Devel-CallChecker
 provides:
   Devel::CallChecker:
     file: lib/Devel/CallChecker.pm
-    version: 0.005
+    version: 0.006
 requires:
   DynaLoader: 0
   DynaLoader::Functions: 0.001
@@ -41,4 +41,4 @@ requires:
   warnings: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.005
+version: 0.006

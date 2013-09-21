@@ -9,13 +9,6 @@
 #define PERL_VERSION_GE(r,v,s) \
 	(PERL_DECIMAL_VERSION >= PERL_VERSION_DECIMAL(r,v,s))
 
-#ifndef PERL_VERSION_STRING
-# define PERL_VERSION_STRING \
-	STRINGIFY(PERL_REVISION) "." \
-	STRINGIFY(PERL_VERSION) "." \
-	STRINGIFY(PERL_SUBVERSION)
-#endif /* !PERL_VERSION_STRING */
-
 #ifndef newSVpvs
 # define newSVpvs(s) newSVpvn(""s"", (sizeof(""s"")-1))
 #endif /* !newSVpvs */
@@ -440,11 +433,18 @@ CODE:
 		"#define "QPFXS"INCLUDED 1\n"
 		"#ifndef PERL_VERSION\n"
 		" #error you must include perl.h before callchecker0.h\n"
-		"#elif !(PERL_REVISION == "STRINGIFY(PERL_REVISION)" && "
-			"PERL_VERSION == "STRINGIFY(PERL_VERSION)" && "
-			"PERL_SUBVERSION == "STRINGIFY(PERL_SUBVERSION)")\n"
-		" #error this callchecker0.h is for "
-			"Perl "PERL_VERSION_STRING" only\n"
+		"#elif !(PERL_REVISION == "STRINGIFY(PERL_REVISION)
+			" && PERL_VERSION == "STRINGIFY(PERL_VERSION)
+#if PERL_VERSION & 1
+			" && PERL_SUBVERSION == "STRINGIFY(PERL_SUBVERSION)
+#endif /* PERL_VERSION & 1 */
+			")\n"
+		" #error this callchecker0.h is for Perl "
+			STRINGIFY(PERL_REVISION)"."STRINGIFY(PERL_VERSION)
+#if PERL_VERSION & 1
+			"."STRINGIFY(PERL_SUBVERSION)
+#endif /* PERL_VERSION & 1 */
+			" only\n"
 		"#endif /* Perl version mismatch */\n"
 #define DEFFN(RETTYPE, PUBNAME, PRIVNAME, ARGTYPES, ARGNAMES) \
 	MY_IMPORT_CALLCONV_S" "RETTYPE" "QPFXS PRIVNAME"(pTHX_ "ARGTYPES");\n" \

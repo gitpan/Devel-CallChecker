@@ -4,7 +4,7 @@
       "Andrew Main (Zefram) <zefram@fysh.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.112621",
+   "generated_by" : "Module::Build version 0.4007, CPAN::Meta::Converter version 2.131560",
    "license" : [
       "perl_5"
    ],
@@ -16,45 +16,45 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "DynaLoader" : 0,
+            "DynaLoader" : "0",
             "ExtUtils::CBuilder" : "0.15",
-            "ExtUtils::ParseXS" : 0,
-            "File::Spec" : 0,
+            "ExtUtils::ParseXS" : "0",
+            "File::Spec" : "0",
             "IO::File" : "1.03",
-            "Module::Build" : 0,
-            "Test::More" : 0,
+            "Module::Build" : "0",
+            "Test::More" : "0",
             "perl" : "5.006",
-            "strict" : 0,
-            "warnings" : 0
+            "strict" : "0",
+            "warnings" : "0"
          }
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : 0,
+            "Module::Build" : "0",
             "perl" : "5.006",
-            "strict" : 0,
-            "warnings" : 0
+            "strict" : "0",
+            "warnings" : "0"
          }
       },
       "runtime" : {
          "conflicts" : {
-            "B::Hooks::OP::Check" : 0
+            "B::Hooks::OP::Check" : "< 0.19"
          },
          "requires" : {
-            "DynaLoader" : 0,
+            "DynaLoader" : "0",
             "DynaLoader::Functions" : "0.001",
-            "Exporter" : 0,
-            "parent" : 0,
+            "Exporter" : "0",
+            "parent" : "0",
             "perl" : "5.006",
-            "strict" : 0,
-            "warnings" : 0
+            "strict" : "0",
+            "warnings" : "0"
          }
       }
    },
    "provides" : {
       "Devel::CallChecker" : {
          "file" : "lib/Devel/CallChecker.pm",
-         "version" : "0.005"
+         "version" : "0.006"
       }
    },
    "release_status" : "stable",
@@ -63,5 +63,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.005"
+   "version" : "0.006"
 }

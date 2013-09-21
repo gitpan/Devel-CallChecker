@@ -1,3 +1,12 @@
+version 0.006; 2013-09-21
+
+  * bugfix: allow generated headers to work on API-compatible Perls 
+    other than the specific version under which this module was installed
+
+  * fix test for thread safety, which risked false negatives
+
+  * avoid a C compiler warning in a test
+
 version 0.005; 2012-02-11
 
   * be thread-safe, by idempotence and mutex control on op check hooking
